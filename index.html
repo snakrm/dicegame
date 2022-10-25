@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dice Game</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body id="body">
+    <div class="reset">
+      <div class="container top">
+        <h1>Start Rolling</h1>
+
+        <div class="dice" style="margin-right: 40px">
+          <p class="Player1">Player 1</p>
+          <img class="img1" src="./images/dice1.png" />
+        </div>
+
+        <div class="dice">
+          <p class="Player2">Player 2</p>
+          <img class="img2" src="./images/dice1.png" />
+        </div>
+      </div>
+
+      <div class="container bottom1">
+		<div class="d-flex justify-content-center ">
+      <div class="score1"> <p id="score1">score : 0</p></div> <br>
+       <div class="score1"> <p id="score2">score : 0</p></div>
+	</div>
+
+        <p id="result">let's start</p>
+
+        <button type="button" class="btn" id="btn1" onClick="rollTheDice() ">
+          Roll the Dice
+        </button>
+      </div>
+      <div class="container bottom2">
+        <button type="button" class="btn" onClick="reset()">Reset</button>
+      </div>
+	  
+    </div>
+
+    <script>
+      var player1 = "Player 1";
+      var player2 = "Player 2";
+
+  
+
+      function reset() {
+        document.getElementById("btn1").disabled = false;
+        document
+          .querySelector(".img1")
+          .setAttribute("src", "./images/dice" + 1 + ".png");
+        document
+          .querySelector(".img2")
+          .setAttribute("src", "./images/dice" + 1 + ".png");
+        document.getElementById("result").innerHTML = "Let's play";
+        document.getElementById("score1").innerHTML = "score : 0";
+        document.getElementById("score2").innerHTML = "score : 0";
+		 score1 = 0;
+         score2 = 0;
+      }
+
+      var score1 = 0;
+      var score2 = 0;
+
+      function rollTheDice() {
+		
+        // setTimeout(function () {
+		document.getElementById("result").innerHTML = "Just ROLL !!";
+          var randomNumber1 = Math.floor(Math.random() * 6) + 1;
+          var randomNumber2 = Math.floor(Math.random() * 6) + 1;
+
+          document
+            .querySelector(".img1")
+            .setAttribute("src", "./images/dice" + randomNumber1 + ".png");
+
+          document
+            .querySelector(".img2")
+            .setAttribute("src", "./images/dice" + randomNumber2 + ".png");
+
+          score1 = score1 + randomNumber1;
+          document.getElementById("score1").innerHTML = "score : " + score1;
+
+          score2 = score2 + randomNumber2;
+          document.getElementById("score2").innerHTML = "score : " + score2;
+
+          if (score1 >= 25 || score2 >= 25) {
+            document.getElementById("btn1").disabled = true;
+            if (score1 == score2) {
+              document.getElementById("result").innerHTML = "Draw!";
+            } else if (score1 < score2) {
+              document.getElementById("result").innerHTML = player2 + " WINS!";
+            } else {
+              document.getElementById("result").innerHTML = player1 + " WINS!";
+            }
+          }
+        // }, 500);
+      }
+    </script>
+  </body>
+</html>
